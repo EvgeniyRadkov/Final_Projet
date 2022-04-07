@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+
+
+    <changeSet id="1" author="vanyasudnishnikov@gmail.com">
+        <createTable tableName="t_employee">
+            <column name="f_id" type="serial">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="f_username" type="varchar">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="f_password" type="varchar">
+                <constraints nullable="false"/>
+            </column>
+            <column name="f_user_mail" type="varchar">
+                <constraints nullable="false"/>
+            </column>
+            <column name="f_status" type="varchar">
+                <constraints nullable="false"/>
+            </column>
+            <column name="f_role" type="varchar">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="2" author="vanyasudnishnikov@gmail.com">
+        <createTable tableName="t_employee_details">
+            <column name="f_employee_id" type="integer">
+                <constraints foreignKeyName="f_employee_id" referencedTableName="t_employee"
+                             referencedColumnNames="f_id"/>
+            </column>
+            <column name="f_first_name" type="varchar">
+                <constraints nullable="false"/>
+            </column>
+            <column name="f_creation_date" type="varchar">
+                <constraints nullable="false"/>
+            </column>
+            <column name="f_attempt" type="integer">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="3" author="vanyasudnishnikov@gmail.com">
+        <createTable tableName="t_employee_session">
+            <column name="f_id" type="serial">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="f_employee_id" type="integer">
+                <constraints foreignKeyName="f_employee_id" referencedTableName="t_employee"
+                             referencedColumnNames="f_id"/>
+            </column>
+            <column name="f_token" type="varchar">
+                <constraints nullable="false"/>
+            </column>
+            <column name="f_session_start" type="varchar">
+                <constraints nullable="false"/>
+            </column>
+            <column name="f_session_end" type="varchar">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="4" author="vanyasudnishnikov@gmail.com">
+        <createTable tableName="t_token_black_list">
+            <column name="f_id" type="serial">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="f_closing_date" type="varchar">
+                <constraints nullable="false"/>
+            </column>
+            <column name="f_jwt_token" type="varchar">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="5" author="vanyasudnishnikov@gmail.com">
+        <insert catalogName="project_part1"
+                dbms="postgresql"
+                schemaName="public"
+                tableName="t_employee">
+            <column name="f_id" value="1"/>
+            <column name="f_username" value="admin"/>
+            <column name="f_password" value="$2a$10$.U0ZH6xxHHMwFCMnFpnjeOg5Az3McmlUrr3KCCU6tFhBi.0omXca6"/>
+            <column name="f_user_mail" value="admin@example.com"/>
+            <column name="f_status" value="ACTIVE"/>
+            <column name="f_role" value="ROLE_ADMIN"/>
+        </insert>
+    </changeSet>
+    <changeSet id="6" author="vanyasudnishnikov@gmail.com">
+        <insert catalogName="project_part1"
+                dbms="postgresql"
+                schemaName="public"
+                tableName="t_employee_details">
+            <column name="f_employee_id" value="1"/>
+            <column name="f_first_name" value="администратор"/>
+            <column name="f_creation_date" value="08.28 15.03.2022"/>
+            <column name="f_attempt" value="0"/>
+        </insert>
+    </changeSet>
+    <changeSet id="7" author="vanyasudnishnikov@gmail.com">
+        <insert catalogName="project_part1"
+                dbms="postgresql"
+                schemaName="public"
+                tableName="t_employee_session">
+            <column name="f_id" value="1"/>
+            <column name="f_employee_id" value="1"/>
+            <column name="f_token"
+                    value="eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY0NzM0NzI1MiwiZXhwIjo0MzA0MzM0NjAwMH0.-yCdWuX-7tgzWcRyDt2K5uj5eGB6OT9OOzLTyHO24HcRiGvEb5dJT6CkroKxOzcBfWcvdaNFXXXto-7c9YZaKw"/>
+            <column name="f_session_start" value="03.27 15.03.2022"/>
+            <column name="f_session_end" value="12.00 28.12.3333"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

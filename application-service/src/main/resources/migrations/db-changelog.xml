@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.1.xsd">
+
+
+    <changeSet id="1" author="vanyasudnishnikov@gmail.com">
+        <createTable tableName="t_application">
+            <column name="f_id" type="serial">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="f_application_conv_id" type="varchar">
+                <constraints nullable="false"/>
+            </column>
+            <column name="f_status" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="f_value_leg" type="varchar(7)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="f_value_ind" type="varchar(7)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="f_employee_id" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="f_percent_conv" type="float(5)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="f_name_legal" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="2" author="vanyasudnishnikov@gmail.com">
+        <createTable tableName="t_application_details">
+            <column name="f_application_id" type="integer">
+                <constraints foreignKeyName="f_application_id" referencedTableName="t_application"
+                             referencedColumnNames="f_id"/>
+            </column>
+            <column name="f_create_date" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="f_last_update" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="f_note" type="varchar">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>
